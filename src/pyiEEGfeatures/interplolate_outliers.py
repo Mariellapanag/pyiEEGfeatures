@@ -1,14 +1,11 @@
-
-
+import numpy as np
+from scipy.interpolate import griddata
 
 def NaNC(df):
-    import numpy as np
     df.loc[df.isnull().any(axis=1), :] = np.nan
     return df
 
 def interpolate_outliers(data_mat, boundaries):
-    import numpy as np
-    from scipy.interpolate import griddata
     N = data_mat.shape[1]
     timevec = np.arange(0,N)/N
 

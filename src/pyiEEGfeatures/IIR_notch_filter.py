@@ -1,6 +1,8 @@
+from scipy import signal
+from scipy.signal import iirfilter
+from scipy.signal import lfilter
 
 def Implement_Notch_Filter(fs, band, freq, ripple, order, filter_type, data):
-    from scipy import signal
 
     # Required input defintions are as follows;
     # fs:     frequency samling
@@ -12,8 +14,7 @@ def Implement_Notch_Filter(fs, band, freq, ripple, order, filter_type, data):
     #         is hard coded to FIR filters
     # filter_type: 'butter', 'bessel', 'cheby1', 'cheby2', 'ellip'
     # data:         the data to be filtered
-    from scipy.signal import iirfilter
-    from scipy.signal import lfilter
+
     nyq  = fs/2.0
     low  = freq - band/2.0
     high = freq + band/2.0
@@ -25,8 +26,6 @@ def Implement_Notch_Filter(fs, band, freq, ripple, order, filter_type, data):
     return filtered_data
 
 def iirnotch_filter(fs, notch_frequency, quality_factor, data):
-    from scipy import signal
-
     """
     
     Args:

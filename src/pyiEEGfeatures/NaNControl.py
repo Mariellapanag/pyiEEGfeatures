@@ -1,9 +1,6 @@
-
-
-
+import numpy as np
 
 def NaNControl(EEGdata, which_channel, srate, winLength, NaNthreshold, overlap):
-    import numpy as np
     '''
 
     Args:

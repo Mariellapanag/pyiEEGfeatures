@@ -1,7 +1,7 @@
 import numpy as np
 import scipy.fftpack
 from scipy.integrate import simps
-from funcs.IIR_notch_filter import *
+from pyiEEGfeatures.IIR_notch_filter import *
 
 # EEGdata = data_CA
 def EEG_Python_Welch(EEGdata, srate, which_channel, frange_bands, winLength, overlap, notch, notch_freq, quality_factor):
