@@ -1,21 +1,6 @@
 import scipy.io as sio
 from paths import *
-from funcs.interplolate_outliers import *
 from funcs.Welch_with_NaNs import *
-
-
-
-
-def band_power_process(data_mat, boundaries, fs, indices_keep):
-
-    raw_mat_list_outliers = interpolate_outliers(data_mat[indices_keep], boundaries)
-    del data_mat
-    print("Detecting outliers and interpolating with cubic function ")
-    list_all = EEG_Python_Welch_allChannels(raw_mat_list_outliers, fs)
-
-    super_list = list_all["all_bp"]
-
-    return super_list
 
 
 def process():
