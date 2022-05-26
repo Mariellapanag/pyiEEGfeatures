@@ -1,8 +1,35 @@
+# Python module
+import json
 import os
-import paths
 import sklearn as sns
+
+# internal modules
 import pyiEEGfeatures.artefactsMetrics
 from pyiEEGfeatures.Welch_with_NaNs import *
+from pyEDFieeg.edfSegmentsiEEGSimple import *
+import paths
+
+
+dataset_names = ["909", "I004_A0001_D001", "I004_A0002_D001", "I004_A0003_D001"]
+subject = dataset_names[0]
+
+# Set the root directory for patient
+root = os.path.join(paths.INPUT_DATA, subject)
+
+corrupted_edf_paths = paths.corrupted_edfs[subject]
+
+error_edfs = paths.error_edfs # channels labels appear in error edfs
+min_n_Chan = paths.min_n_Chan # the minimum threshold of the number of channels needed to be included in the edf file
+
+# iEEG channels for each subject provided in json files (or mat file). This mat files include the iEEG channels
+# having excluded the Heart Rate Channels
+# EEG_channels = sio.loadmat(os.path.join(paths.iEEG_channels, subject, "channels.mat"))
+EEG_channel_path = os.path.join(paths.IN_CHANNELS, "{}.json".format(subject))
+with open(EEG_channel_path) as json_file:
+    Channels_json = json.load(json_file)
+    print(Channels_json)
+EEG_channel_list = [element['name'] for element in Channels_json]
+
 
 # Define EEG bands
 frange_bands = {'Delta': (1, 4),
@@ -19,9 +46,6 @@ notch = True
 notch_freq = [60.0, 120.0] # remove line noise and its harmonics
 quality_factor = 30.0
 NaNthreshold = 0.5
-
-# fs = 399 # Dog data
-fs = 512 # subject 909
 
 dataset_names = ["909", "I004_A0001_D001", "I004_A0002_D001", "I004_A0003_D001"]
 subject = dataset_names[0]
