@@ -8,6 +8,7 @@ license = "MIT"
 [tool.poetry.dependencies]
 python = "^3.8,<3.11"
 scipy = "^1.8.1"
+sklearn = "^0.0"
 
 [tool.poetry.dev-dependencies]
 Sphinx = "^4.5.0"
