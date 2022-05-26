@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "pyieegfeatures"
+name = "pyiEEGfeatures"
 version = "0.0.1"
 description = "Useful functions for extracting features from iEEG signals"
 authors = ["mariella <mariella199098@gmail.com>"]
