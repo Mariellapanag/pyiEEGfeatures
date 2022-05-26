@@ -43,27 +43,11 @@ corrupted_edfs = {"1167": [],
                   "1379": os.path.abspath(os.path.join("F:", "UCLH_GLAS", "icEEG", "1379", "e3ax_20160727_0011.edf")),
                   "1395": os.path.abspath(os.path.join("F:", "UCLH_GLAS", "icEEG", "1395", "20150621_1729.edf"))}
 
-# # location where Plots for raw data seizures will be located
-# PLOT_SEIZURES_DIR = os.path.abspath(os.path.join(ALL_FILES_DIR, "PLOTS_SEIZURES"))
-#
 # location where Plots for Detecting Bad channels are located for each subject
 PLOTS_BAD_CHANNELS_DIR = os.path.abspath(os.path.join(ALL_FILES_DIR, "PLOTS_BAD_CHANNELS"))
 #
-# # location where EDF information is written to
-# EDF_INFO_DIR = os.path.abspath(os.path.join(ALL_FILES_DIR, "EDF_INFO"))
-#
-# # location where collated EDF is written to
-# EDF_OUT_DIR = os.path.abspath(os.path.join(ALL_FILES_DIR, "EDF_OUT"))
-#
-# # location where memmaps for channels (if using) are stored temporarily during runtime
-# # otherwise, memory is used
-# CHANNELS_DIR = os.path.abspath(os.path.join(ALL_FILES_DIR, "CHANNELS"))
-#
-# # location segments of the collated data are written to
-# SEGMENT_DIR = os.path.abspath(os.path.join(ALL_FILES_DIR, "SEGMENTS"))
-#
-# # location of scripts results
-# SCRIPTS_OUT_DIR = os.path.abspath(os.path.join(ALL_FILES_DIR, "SCRIPTS_OUT"))
+# location where bandpower files will be saved
+BAND_POWER_DIR = os.path.abspath(os.path.join(ALL_FILES_DIR, "BP_EXTRACTED"))
 
 # setup directories
 directories = [constant for constant in dir() if "_DIR" in constant]

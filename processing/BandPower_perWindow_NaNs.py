@@ -3,6 +3,7 @@
 # Python module
 import json
 import seaborn as sns
+import scipy.io as sio
 
 # internal modules
 from pyiEEGfeatures.artefactsMetrics import *
@@ -10,6 +11,9 @@ from pyiEEGfeatures.Welch_with_NaNs import *
 from pyEDFieeg.edfSegmentsiEEGSimple import *
 import paths
 
+
+sta = 0
+sto = 10
 
 def bandpower_process(EEGdata, fs, badch_indx):
 
@@ -131,8 +135,8 @@ t_start = [dt for dt in
 t_stop = [tt + datetime.timedelta(seconds=winsec-1) for tt in t_start]
 
 # Checking all segments
-tt_start = t_start
-tt_stop = t_stop
+tt_start = t_start[sta:sto]
+tt_stop = t_stop[sta:sto]
 
 iEEGraw_data = edfExportSegieeg_A(edfs_info = edfs_info, channelsKeep = channelsKeep, t_start = tt_start, t_stop = tt_stop, fs_target = fs_target)
 
@@ -143,6 +147,13 @@ fs = fs_target
 # Compute amplitude range for every 30s windows
 ampl_range_all = [amplrange_axis1(dd) for dd in iEEGraw_data]
 
+# i = 0
+# for ii in ampl_range_all:
+#
+#     rr = standardise(ii)
+#     print(i)
+#     print(rr)
+#     i = i+1
 # standradise each 30s window amplitude ranges across channels (range - mean(range of all channels))/std(range of all channels)
 ampl_range_all_stand = [standardise(ss) for ss in ampl_range_all]
 
@@ -174,19 +185,24 @@ for bb in range(len(iEEGraw_data)):
 
 
 super_dict = {}
-for d in data_mat_list:
+for d in data_bp_list:
     for k,v in d.items():
         super_dict.setdefault(k,[]).append(v)
         #append(v)
 
-del data_mat_list
+del data_bp_list
 
 for k,v in super_dict.items():
     # print(k,v)
     super_dict[k] = np.vstack(v)
 
-super_dict_ch = {"super_dict": super_dict, "channels": channels}
-del super_dict, channels
-sio.savemat(os.path.join(output_folder, "BPall_D{}.mat".format(id)), super_dict_ch)
-BPdata = sio.loadmat(os.path.join(output_folder, "BPall_D{}.mat".format(id)))
+super_dict_ch = {"super_dict": super_dict, "channels": channelsKeep, "fs": fs}
+
+del super_dict, channelsKeep
+
+bp_path = os.path.join(paths.BAND_POWER_DIR, subject)
+os.makedirs(bp_path)
+
+sio.savemat(os.path.join(bp_path, "BPall_P{}.mat".format(id)), super_dict_ch)
+#BPdata = sio.loadmat(os.path.join(bp_path, "BPall_D{}.mat".format(id)))
 
