@@ -1,5 +1,5 @@
-from funcs.NaNControl import NaNControl
-from funcs.Welch_method import EEG_Python_Welch
+from pyiEEGfeatures.NaNControl import NaNControl
+from pyiEEGfeatures.Welch_method import EEG_Python_Welch
 import numpy as np
 
 """
@@ -25,7 +25,7 @@ Version 0.1 Date: 30/12/2020
 
 # EEGdata = np.transpose(raw_df_list_NaNC[0]).values
 
-def EEG_Python_Welch_allChannels(EEGdata, srate):
+def EEG_Python_Welch_allChannels(EEGdata, srate, frange_bands, winLength, overlap, notch, notch_freq, quality_factor, NaNthreshold):
     '''
 
     Args:
@@ -43,21 +43,21 @@ def EEG_Python_Welch_allChannels(EEGdata, srate):
     '''
 
     # Define EEG bands
-    frange_bands = {'Delta': (1, 4),
-                    'Theta': (4, 8),
-                    'Alpha': (8, 13),
-                    'Beta': (13, 30),
-                    'Gamma': (30, 80),
-                    'hGamma': (80, 120)}
+    # frange_bands = {'Delta': (1, 4),
+    #                 'Theta': (4, 8),
+    #                 'Alpha': (8, 13),
+    #                 'Beta': (13, 30),
+    #                 'Gamma': (30, 80),
+    #                 'hGamma': (80, 120)}
 
     # order = 4 # The order of the (IIR) Butterworth filter, bandpass filter
-    winLength = 1.5  # The window length in seconds for the Welch's method
-    overlap = 1 / 2  # The percentage of overlapping to be performed in the windowing method
+    # winLength = 1.5  # The window length in seconds for the Welch's method
+    # overlap = 1 / 2  # The percentage of overlapping to be performed in the windowing method
     n_channels = EEGdata.shape[0]
-    notch = True
-    notch_freq = [60.0, 120.0] # remove line noise and its harmonics
-    quality_factor = 30.0
-    NaNthreshold = 0.5
+    # notch = True
+    # notch_freq = [60.0, 120.0] # remove line noise and its harmonics
+    # quality_factor = 30.0
+    # NaNthreshold = 0.5
 
     # Check if all values are NaNs
     if np.sum(np.isnan(EEGdata).all()) == 1:
