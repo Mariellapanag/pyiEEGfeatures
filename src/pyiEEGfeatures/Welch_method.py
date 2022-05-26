@@ -2,9 +2,10 @@ import numpy as np
 import scipy.fftpack
 from scipy.integrate import simps
 from pyiEEGfeatures.IIR_notch_filter import *
+from pyiEEGfeatures.FilterEEG import *
 
 # EEGdata = data_CA
-def EEG_Python_Welch(EEGdata, srate, which_channel, frange_bands, winLength, overlap, notch, notch_freq, quality_factor):
+def EEG_Python_Welch(EEGdata, srate, which_channel, butter_cutoff, butter_order, frange_bands, winLength, overlap, notch, notch_freq, quality_factor):
 
     '''
     Args:
@@ -73,9 +74,11 @@ def EEG_Python_Welch(EEGdata, srate, which_channel, frange_bands, winLength, ove
                 notched_data = iirnotch_filter(srate, notch_freq[1], quality_factor, notched_data1)
             else:
                 notched_data = datachunk.copy()
+            # Butterworth bandpass filter
+            butter_filtered_data = FilterEEG_Channel(datachunk, butter_cutoff, srate, butterworth_type = "bandpass", butter_order)
 
             # apply Hanning taper to data
-            datachunk = notched_data * hannw
+            datachunk = butter_filtered_data * hannw
 
             # compute its power
             tmppow = np.abs(scipy.fftpack.fft(datachunk)/winlength)**2

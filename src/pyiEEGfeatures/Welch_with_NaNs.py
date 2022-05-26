@@ -25,7 +25,7 @@ Version 0.1 Date: 30/12/2020
 
 # EEGdata = np.transpose(raw_df_list_NaNC[0]).values
 
-def EEG_Python_Welch_allChannels(EEGdata, srate, frange_bands, winLength, overlap, notch, notch_freq, quality_factor, NaNthreshold):
+def EEG_Python_Welch_allChannels(EEGdata, badch_indx, srate, frange_bands, winLength, butter_cutoff, butter_order, overlap, notch, notch_freq, quality_factor, NaNthreshold):
     '''
 
     Args:
@@ -69,9 +69,16 @@ def EEG_Python_Welch_allChannels(EEGdata, srate, frange_bands, winLength, overla
         psds = np.full_like(init_array, np.nan)
 
     else:
-        # Referencing using common average reference
-        mean = np.nanmean(EEGdata, axis=0)
-        data_CA = EEGdata - mean[np.newaxis,:]
+        # if there are bad channels detected we exclude them form the common average calculation
+        if (len(badch_indx) != 0):
+            # Referencing using common average reference
+            keeprows = [ii for ii in range(EEGdata.shape[0]) if ii not in badch_indx]
+            mean = np.nanmean(EEGdata[keeprows,:], axis=0)
+            data_CA = EEGdata - mean[np.newaxis,:]
+        else:
+            # Referencing using common average reference
+            mean = np.nanmean(EEGdata, axis=0)
+            data_CA = EEGdata - mean[np.newaxis,:]
 
         freqb_channels_bp = np.zeros((len(frange_bands), n_channels), dtype = np.float32)
 
@@ -82,8 +89,9 @@ def EEG_Python_Welch_allChannels(EEGdata, srate, frange_bands, winLength, overla
             # Control checking for NaNs
             message = NaNControl(data_CA, which_channel, srate, winLength, NaNthreshold, overlap)
             if(message == "Pass"):
-                temp_run = EEG_Python_Welch(data_CA, srate, which_channel, frange_bands, winLength, overlap,
-                                            notch, notch_freq, quality_factor)
+                temp_run = EEG_Python_Welch(data_CA, srate, which_channel,
+                                            butter_cutoff, butter_order, frange_bands,
+                                            winLength, overlap, notch, notch_freq, quality_factor)
                 freqb_channels_bp[:,i] = temp_run[0]
                 freqlist.append(temp_run[1])
                 eegpowW.append(temp_run[2])

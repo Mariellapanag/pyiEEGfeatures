@@ -11,6 +11,16 @@ from pyEDFieeg.edfSegmentsiEEGSimple import *
 import paths
 
 
+def bandpower_process(EEGdata, fs, frange_bands,winLength, overlap, notch, notch_freq,quality_factor, NaNthreshold):
+
+    print("Computing band power for this segment of data")
+    list_all = EEG_Python_Welch_allChannels(EEGdata, fs, frange_bands,
+                                 winLength, overlap, notch, notch_freq,
+                                 quality_factor, NaNthreshold)
+    super_list = list_all["all_bp"]
+    return super_list
+
+
 subject_list = ["1106", "1109", "1149", "1163", "1182", "851",
                 "934", "95", "999", "GLAS040", "GLAS041", "GLAS044", "GLAS047",
                 "1005", "1200", "1211", "1379", "1395", "1167"]
@@ -111,7 +121,11 @@ frange_bands = {'Delta': (1, 4),
                 'Gamma': (30, 80),
                 'hGamma': (80, 120)}
 
-order = 4 # The order of the (IIR) Butterworth filter, bandpass filter
+butter_cutoff = [0.5, 120]
+
+butter_order = 2 # The 4th order of the (IIR) Butterworth filter, bandpass filter,
+#because this filter is forward-backward
+
 # this was used for SWEC data processing
 winLength = 3  # The window length in seconds for the Welch's method
 # this was used for SWEC data processing
@@ -125,7 +139,6 @@ notch_freq = [50.0, 100.0] # remove line noise and its harmonics
 quality_factor = 30.0
 NaNthreshold = 0.5
 
-
 # Compute amplitude range for every 30s windows
 ampl_range_all = [amplrange_axis1(dd) for dd in iEEGraw_data]
 
@@ -135,13 +148,26 @@ ampl_range_all_stand = [standardise(ss) for ss in ampl_range_all]
 ampl_range_stand_conc = np.hstack(ampl_range_all_stand)
 
 # Check all standardise values obtained from all 30s windows amplitude ranges
+plot_bad_path = os.path.join(paths.PLOTS_BAD_CHANNELS_DIR, subject)
+os.makedirs(plot_bad_path, exist_ok=True)
+
 sns.set_style('whitegrid')
 sns.kdeplot(np.array(ampl_range_stand_conc), bw=0.5)
+plt.savefig(os.path.join(plot_bad_path, 'Ampl_range_across_all.pdf'))
+
+z_threshold = 3 # if z-score is above 3 or below -3 then the channel is flagged as outlier/bad
+
+i=0
+bad_ch_ind_allw = list()
+for ww in ampl_range_all_stand:
+    print(i)
+    print(ww)
+    bad_ch_ind = [i for i,v in enumerate(ww) if abs(v) > 3]
+    bad_ch_ind_allw.append(bad_ch_ind)
+    i = i+1
 
 
-
-EEG_Python_Welch_allChannels(raw_data_list, fs)
-data_mat_list = [band_power_process(raw_npy, boundaries, fs, indices_keep) for raw_npy in raw_files_sorted]
+data_dict_list = [band_power_process(raw_npy, boundaries, fs, indices_keep) for raw_npy in raw_files_sorted]
 
 super_dict = {}
 for d in data_mat_list:
