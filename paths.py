@@ -9,9 +9,7 @@ ALL_FILES_DIR = os.path.abspath(os.path.join(ROOT_DIR, loc_output))
 loc_input = "IN_FILES"
 IN_FILES = os.path.abspath(os.path.join(ROOT_DIR, loc_input))
 
-# location where iEEG raw data are located for each subject
-IN_RAW_DATA = os.path.abspath(os.path.join(IN_FILES, "DATA"))
-
+# The location where edf files are
 IN_EDF_DATA = os.path.abspath(os.path.join("F:", "UCLH_GLAS", "icEEG"))
 
 # location where iEEG channels are located for each subject

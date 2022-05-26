@@ -1,6 +1,5 @@
 # Python module
 import json
-import os
 import sklearn as sns
 
 # internal modules
@@ -14,7 +13,7 @@ dataset_names = ["909", "I004_A0001_D001", "I004_A0002_D001", "I004_A0003_D001"]
 subject = dataset_names[0]
 
 # Set the root directory for patient
-root = os.path.join(paths.INPUT_DATA, subject)
+root = os.path.join(paths.IN_EDF_DATA, subject)
 
 corrupted_edf_paths = paths.corrupted_edfs[subject]
 
