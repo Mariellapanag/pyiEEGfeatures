@@ -1,3 +1,4 @@
+import os
 import paths
 import sklearn as sns
 import pyiEEGfeatures.artefactsMetrics
@@ -20,7 +21,7 @@ quality_factor = 30.0
 NaNthreshold = 0.5
 
 # fs = 399 # Dog data
-# fs = 512 # subject 909
+fs = 512 # subject 909
 
 dataset_names = ["909", "I004_A0001_D001", "I004_A0002_D001", "I004_A0003_D001"]
 subject = dataset_names[0]
@@ -31,7 +32,7 @@ raw_files = os.listdir(raw_subj)
 # sort files based on the number included in their names
 raw_files_sorted = sorted(raw_files, key = lambda x: int(x.split("_")[1].split(".")[0]))
 
-raw_data_list = [np.load(os.path.join(raw_subj, raw)) for raw in raw_files_sorted[0:2]]
+raw_data_list = [np.load(os.path.join(raw_subj, raw)) for raw in raw_files_sorted]
 
 # Compute amplitude range for every 30s windows
 ampl_range_all = [amplrange_axis1(dd) for dd in raw_data_list]
