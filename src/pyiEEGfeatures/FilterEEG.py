@@ -1,8 +1,7 @@
+from scipy import signal
+import numpy as np
 
 def FilterEEG(EEG, cutoff, sample_rate, butterworth_type, order):
-    from scipy import signal
-    import numpy as np
-
     """
     Simple Butterworth filter, with zero-phase filtering
     Importance of use of 2nd order sections:
@@ -32,9 +31,6 @@ def FilterEEG(EEG, cutoff, sample_rate, butterworth_type, order):
 
 
 def FilterEEG_Channel(EEG, cutoff, sample_rate, butterworth_type, order):
-    from scipy import signal
-    import numpy as np
-
     """
     Simple Butterworth filter, with zero-phase filtering
     Importance of use of 2nd order sections:
