@@ -15,6 +15,34 @@ IN_EDF_DATA = os.path.abspath(os.path.join("F:", "UCLH_GLAS", "icEEG"))
 # location where iEEG channels are located for each subject
 IN_CHANNELS = os.path.abspath(os.path.join(IN_FILES, "CHANNEL_LIST"))
 
+# Include here the labels that are fault edf files
+error_edfs = ["1"] # channels labels appear in error edfs
+
+# Lower acceptable threshold for the number of channels in edf files
+min_n_Chan = 5
+
+# Include here the paths from the edf files that are corrupted
+corrupted_edfs = {"1167": [],
+                  "1106": [],
+                  "1109": [],
+                  "1149": [],
+                  "1163": [],
+                  "1182": [],
+                  "851": [],
+                  "934": [],
+                  "95": [],
+                  "999": [],
+                  "909":[],
+                  "GLAS040": [],
+                  "GLAS041": [],
+                  "GLAS044": [],
+                  "GLAS047": [],
+                  "1005": os.path.abspath(os.path.join("F:", "UCLH_GLAS", "icEEG", "1005", "20110630_0211.edf")),
+                  "1200": os.path.abspath(os.path.join("F:", "UCLH_GLAS", "icEEG", "1200", "20130701_0612.edf")),
+                  "1211": os.path.abspath(os.path.join("F:", "UCLH_GLAS", "icEEG", "1211", "20130807_0909.edf")),
+                  "1379": os.path.abspath(os.path.join("F:", "UCLH_GLAS", "icEEG", "1379", "e3ax_20160727_0011.edf")),
+                  "1395": os.path.abspath(os.path.join("F:", "UCLH_GLAS", "icEEG", "1395", "20150621_1729.edf"))}
+
 # # location where Plots for raw data seizures will be located
 # PLOT_SEIZURES_DIR = os.path.abspath(os.path.join(ALL_FILES_DIR, "PLOTS_SEIZURES"))
 #
