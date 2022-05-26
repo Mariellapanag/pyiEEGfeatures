@@ -11,12 +11,38 @@ from pyEDFieeg.edfSegmentsiEEGSimple import *
 import paths
 
 
-def bandpower_process(EEGdata, fs, frange_bands,winLength, overlap, notch, notch_freq,quality_factor, NaNthreshold):
+def bandpower_process(EEGdata, fs, badch_indx):
+
+    # Define EEG bands - those where used for SWEC data processing
+    frange_bands = {'Delta': (1, 4),
+                    'Theta': (4, 8),
+                    'Alpha': (8, 13),
+                    'Beta': (13, 30),
+                    'Gamma': (30, 80),
+                    'hGamma': (80, 120)}
+
+    butter_cutoff = [0.5, 120]
+
+    butter_order = 2 # The 4th order of the (IIR) Butterworth filter, bandpass filter,
+    #because this filter is forward-backward
+
+    # this was used for SWEC data processing
+    winLength = 3  # The window length in seconds for the Welch's method
+    # this was used for SWEC data processing
+    overlap = 0  # The percentage of overlapping to be performed in the windowing method
+
+    notch = True
+    base_notch = 50 # 50Hz for the UCLH and GLAS data, while for the Canine data is 60Hz
+    # THIS NEEDS TO BE SPECIDIED BY THE USER
+    notch_freq = [50.0, 100.0] # remove line noise and its harmonics
+
+    quality_factor = 30.0
+    NaNthreshold = 0.5
 
     print("Computing band power for this segment of data")
-    list_all = EEG_Python_Welch_allChannels(EEGdata, fs, frange_bands,
-                                 winLength, overlap, notch, notch_freq,
-                                 quality_factor, NaNthreshold)
+    list_all = EEG_Python_Welch_allChannels(EEGdata, badch_indx, fs, frange_bands,
+                                            winLength, butter_cutoff, butter_order, overlap, notch,
+                                            notch_freq, quality_factor, NaNthreshold)
     super_list = list_all["all_bp"]
     return super_list
 
@@ -113,31 +139,6 @@ iEEGraw_data = edfExportSegieeg_A(edfs_info = edfs_info, channelsKeep = channels
 # Start working on extracting band power
 fs = fs_target
 
-# Define EEG bands - those where used for SWEC data processing
-frange_bands = {'Delta': (1, 4),
-                'Theta': (4, 8),
-                'Alpha': (8, 13),
-                'Beta': (13, 30),
-                'Gamma': (30, 80),
-                'hGamma': (80, 120)}
-
-butter_cutoff = [0.5, 120]
-
-butter_order = 2 # The 4th order of the (IIR) Butterworth filter, bandpass filter,
-#because this filter is forward-backward
-
-# this was used for SWEC data processing
-winLength = 3  # The window length in seconds for the Welch's method
-# this was used for SWEC data processing
-overlap = 0  # The percentage of overlapping to be performed in the windowing method
-
-notch = True
-base_notch = 50 # 50Hz for the UCLH and GLAS data, while for the Canine data is 60Hz
-# THIS NEEDS TO BE SPECIDIED BY THE USER
-notch_freq = [50.0, 100.0] # remove line noise and its harmonics
-
-quality_factor = 30.0
-NaNthreshold = 0.5
 
 # Compute amplitude range for every 30s windows
 ampl_range_all = [amplrange_axis1(dd) for dd in iEEGraw_data]
@@ -167,7 +168,10 @@ for ww in ampl_range_all_stand:
     i = i+1
 
 
-data_dict_list = [band_power_process(raw_npy, boundaries, fs, indices_keep) for raw_npy in raw_files_sorted]
+data_bp_list = list()
+for bb in range(len(iEEGraw_data)):
+    data_bp_list.append(bandpower_process(iEEGraw_data[bb], fs, bad_ch_ind_allw[bb]))
+
 
 super_dict = {}
 for d in data_mat_list:
