@@ -46,8 +46,8 @@ corrupted_edfs = {"1167": [],
 # # location where Plots for raw data seizures will be located
 # PLOT_SEIZURES_DIR = os.path.abspath(os.path.join(ALL_FILES_DIR, "PLOTS_SEIZURES"))
 #
-# # location where Plots for Detecting Bad channels are located for each subject
-# PLOTS_BAD_CHANNELS_DIR = os.path.abspath(os.path.join(ALL_FILES_DIR, "PLOTS_BAD_CHANNELS"))
+# location where Plots for Detecting Bad channels are located for each subject
+PLOTS_BAD_CHANNELS_DIR = os.path.abspath(os.path.join(ALL_FILES_DIR, "PLOTS_BAD_CHANNELS"))
 #
 # # location where EDF information is written to
 # EDF_INFO_DIR = os.path.abspath(os.path.join(ALL_FILES_DIR, "EDF_INFO"))
