@@ -203,6 +203,6 @@ del super_dict, channelsKeep
 bp_path = os.path.join(paths.BAND_POWER_DIR, subject)
 os.makedirs(bp_path)
 
-sio.savemat(os.path.join(bp_path, "BPall_P{}.mat".format(id)), super_dict_ch)
-#BPdata = sio.loadmat(os.path.join(bp_path, "BPall_D{}.mat".format(id)))
+sio.savemat(os.path.join(bp_path, "BPall_P{}.mat".format(subject)), super_dict_ch)
+BPdata = sio.loadmat(os.path.join(bp_path, "BPall_P{}.mat".format(subject)))
 
