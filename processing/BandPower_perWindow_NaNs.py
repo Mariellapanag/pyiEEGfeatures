@@ -2,7 +2,7 @@
 
 # Python module
 import json
-import sklearn as sns
+import seaborn as sns
 
 # internal modules
 from pyiEEGfeatures.artefactsMetrics import *
@@ -15,7 +15,9 @@ subject_list = ["1106", "1109", "1149", "1163", "1182", "851",
                 "934", "95", "999", "GLAS040", "GLAS041", "GLAS044", "GLAS047",
                 "1005", "1200", "1211", "1379", "1395", "1167"]
 
-subject = subject_list[0]
+#subject = subject_list[0]
+# This subject is used for test purposes
+subject = "909"
 
 # Set the root directory for patient
 root = os.path.join(paths.IN_EDF_DATA, subject)
@@ -116,7 +118,7 @@ winLength = 3  # The window length in seconds for the Welch's method
 overlap = 0  # The percentage of overlapping to be performed in the windowing method
 
 notch = True
-base_notch = 50
+base_notch = 50 # 50Hz for the UCLH and GLAS data, while for the Canine data is 60Hz
 # THIS NEEDS TO BE SPECIDIED BY THE USER
 notch_freq = [50.0, 100.0] # remove line noise and its harmonics
 
@@ -126,12 +128,15 @@ NaNthreshold = 0.5
 
 # Compute amplitude range for every 30s windows
 ampl_range_all = [amplrange_axis1(dd) for dd in iEEGraw_data]
+
 # standradise each 30s window amplitude ranges across channels (range - mean(range of all channels))/std(range of all channels)
 ampl_range_all_stand = [standardise(ss) for ss in ampl_range_all]
 
+ampl_range_stand_conc = np.hstack(ampl_range_all_stand)
+
 # Check all standardise values obtained from all 30s windows amplitude ranges
 sns.set_style('whitegrid')
-sns.kdeplot(np.array(data), bw=0.5)
+sns.kdeplot(np.array(ampl_range_stand_conc), bw=0.5)
 
 
 

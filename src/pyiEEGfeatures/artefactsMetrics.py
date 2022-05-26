@@ -30,5 +30,8 @@ def amplrange_axis1(data_2darray: np.ndarray):
     return np.apply_along_axis(amplrange, 1, data_2darray)
 
 def standardise(data_array: np.array):
-
-    return (data_array-np.nanmean(data_array))/np.nanstd(data_array)
+    if (np.sum(~np.isnan(data_array)) > 10):
+        result = (data_array-np.nanmean(data_array))/np.nanstd(data_array)
+    else:
+        result = np.nan
+    return result
