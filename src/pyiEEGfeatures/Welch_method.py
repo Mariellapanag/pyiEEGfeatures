@@ -75,7 +75,7 @@ def EEG_Python_Welch(EEGdata, srate, which_channel, butter_cutoff, butter_order,
             else:
                 notched_data = datachunk.copy()
             # Butterworth bandpass filter
-            butter_filtered_data = FilterEEG_Channel(datachunk, butter_cutoff, srate,"bandpass", butter_order)
+            butter_filtered_data = FilterEEG_Channel(notched_data, butter_cutoff, srate,"bandpass", butter_order)
 
             # apply Hanning taper to data
             datachunk = butter_filtered_data * hannw
