@@ -1,5 +1,5 @@
 from pyiEEGfeatures.NaNControl import NaNControl
-from pyiEEGfeatures.Welch_method import EEG_Python_Welch
+from pyiEEGfeatures.Pyweltch_method import EEG_PyWelch
 import numpy as np
 
 """
@@ -89,7 +89,7 @@ def EEG_Python_Welch_allChannels(EEGdata, badch_indx, srate, frange_bands, winLe
             # Control checking for NaNs
             message = NaNControl(data_CA, which_channel, srate, winLength, NaNthreshold, overlap)
             if(message == "Pass"):
-                temp_run = EEG_Python_Welch(data_CA, srate, which_channel,
+                temp_run = EEG_PyWelch(data_CA, srate, which_channel,
                                             butter_cutoff, butter_order, frange_bands,
                                             winLength, overlap, notch, notch_freq, quality_factor)
                 freqb_channels_bp[:,i] = temp_run[0]
