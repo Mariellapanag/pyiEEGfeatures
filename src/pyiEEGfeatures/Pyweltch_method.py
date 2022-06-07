@@ -79,10 +79,10 @@ def EEG_PyWelch(EEGdata, srate, which_channel, butter_cutoff, butter_order, fran
         selected_frange = np.array(selected_frange[band])
 
         # Find closest indices of band in frequency vector
-        idx_band = np.logical_and(freqvec >= selected_frange[0], freqvec <= selected_frange[1])
+        idx_band = np.logical_and(freq >= selected_frange[0], freq <= selected_frange[1])
 
         # Integral approximation of the spectrum using Simpson's rule.
-        bp = simps(eegpowW[idx_band], dx=freq_res)
+        bp = simps(psds[idx_band], dx=freq_res)
 
         # Store the spectral density power for each band and each window into the matrix
         psd_band[band] = bp
