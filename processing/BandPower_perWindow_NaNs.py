@@ -12,9 +12,6 @@ from pyEDFieeg.edfSegmentsiEEGSimple import *
 import paths
 
 
-sta = 0
-sto = 10
-
 def bandpower_process(EEGdata, fs, badch_indx):
 
     # Define EEG bands - those where used for SWEC data processing
