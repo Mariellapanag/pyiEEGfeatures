@@ -36,7 +36,7 @@ def bandpower_process(EEGdata, fs, badch_indx):
     overlap = 0  # The percentage of overlapping to be performed in the windowing method
 
     notch = True
-    base_notch = 50 # 50Hz for the UCLH and GLAS data, while for the Canine data is 60Hz
+    #base_notch = 50 # 50Hz for the UCLH and GLAS data, while for the Canine data is 60Hz
     # THIS NEEDS TO BE SPECIDIED BY THE USER
     notch_freq = [50.0, 100.0] # remove line noise and its harmonics
 
@@ -51,9 +51,9 @@ def bandpower_process(EEGdata, fs, badch_indx):
     return super_list
 
 
-subject_list = ["1106", "1109", "1149", "1163", "1182", "851",
-                "934", "95", "999", "GLAS040", "GLAS041", "GLAS044", "GLAS047",
-                "1005", "1200", "1211", "1379", "1395", "1167"]
+subject_list = ["95", "851", "934", "999", "1005", "1149",
+                "1163", "1167", "1182", "1200", "1211", "1106", "1379", "1395",
+                "GLAS040", "GLAS041", "GLAS044", "GLAS047"]
 
 #subject = subject_list[0]
 # This subject is used for test purposes
