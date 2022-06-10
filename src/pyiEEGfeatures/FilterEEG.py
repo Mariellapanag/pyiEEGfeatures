@@ -54,12 +54,10 @@ def FilterEEG_Channel(EEG: np.array, cutoff: list, sample_rate: float, butterwor
     """
     sos = signal.butter(N = order, Wn = cutoff, btype = butterworth_type, analog = False,
                         fs = sample_rate, output = "sos") # create the filter
-    filtered = np.empty(EEG.shape[0])
+    # Apply filter in every signal (#individual signal)
+    # Apply a forward-backward digital filter using cascaded second-order sections.
+    filtered = signal.sosfiltfilt(sos, EEG)
 
-    # Apply filter in every signal (#rows = #individual signals)
-    for i in range(EEG.shape[0]):
-        filtered = signal.sosfiltfilt(sos, EEG) # Apply a
-        # forward-backward digital filter using cascaded second-order sections.
     return filtered
 
 

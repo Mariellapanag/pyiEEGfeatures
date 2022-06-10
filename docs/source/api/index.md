@@ -6,4 +6,7 @@
     
 artefactsMetrics
 eeg_plot
+FilterEEG
+IIR_notch_filter
+NaNcontrol
 ```
