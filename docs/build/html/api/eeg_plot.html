@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>API &mdash; pyiEEGfeatures</title>
+  <title>Functions for plotting raw data/EEG data &mdash; pyiEEGfeatures</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -38,7 +38,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <!-- Local TOC -->
               <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">API</a></li>
+<li><a class="reference internal" href="#">Functions for plotting raw data/EEG data</a></li>
 </ul>
 </div>
         </div>
@@ -55,9 +55,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>API</li>
+      <li>Functions for plotting raw data/EEG data</li>
       <li class="wy-breadcrumbs-aside">
-              <a href="https://github.com/Mariellapanag/pyiEEGfeatures/blob/main../docs/source/api/index.md" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/Mariellapanag/pyiEEGfeatures/blob/main../docs/source/api/eeg_plot.md" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -65,18 +65,25 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="api">
-<h1>API<a class="headerlink" href="#api" title="Permalink to this headline"></a></h1>
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="artefactsMetrics.html">Functions for outlier detection within the segments</a></li>
-<li class="toctree-l1"><a class="reference internal" href="eeg_plot.html">Functions for plotting raw data/EEG data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="FilterEEG.html">Functions for filtering raw data/EEG data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="IIR_notch_filter.html">Functions for removing line noise from signals</a></li>
-<li class="toctree-l1"><a class="reference internal" href="NaNcontrol.html">Function for checking the amount of NaN values</a></li>
+  <section id="module-pyiEEGfeatures.eeg_plot">
+<span id="functions-for-plotting-raw-data-eeg-data"></span><h1>Functions for plotting raw data/EEG data<a class="headerlink" href="#module-pyiEEGfeatures.eeg_plot" title="Permalink to this headline"></a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyiEEGfeatures.eeg_plot.plotEEG">
+<span class="sig-prename descclassname"><span class="pre">pyiEEGfeatures.eeg_plot.</span></span><span class="sig-name descname"><span class="pre">plotEEG</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_channels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ch_names</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_TimePoints</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">srate</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyiEEGfeatures.eeg_plot.plotEEG" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> – </p></li>
+<li><p><strong>n_channels</strong> – </p></li>
+<li><p><strong>ch_names</strong> – </p></li>
+<li><p><strong>n_TimePoints</strong> – </p></li>
+<li><p><strong>srate</strong> – </p></li>
 </ul>
-</div>
+</dd>
+</dl>
+<p>Returns:</p>
+</dd></dl>
+
 </section>
 
 

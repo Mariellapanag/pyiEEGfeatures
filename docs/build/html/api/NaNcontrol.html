@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Function for checking the amount of NaN values &mdash; pyiEEGfeatures</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> pyiEEGfeatures
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Function for checking the amount of NaN values</a></li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">pyiEEGfeatures</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Function for checking the amount of NaN values</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/Mariellapanag/pyiEEGfeatures/blob/main../docs/source/api/NaNcontrol.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-pyiEEGfeatures.NaNControl">
+<span id="function-for-checking-the-amount-of-nan-values"></span><h1>Function for checking the amount of NaN values<a class="headerlink" href="#module-pyiEEGfeatures.NaNControl" title="Permalink to this headline"></a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyiEEGfeatures.NaNControl.NaNControl">
+<span class="sig-prename descclassname"><span class="pre">pyiEEGfeatures.NaNControl.</span></span><span class="sig-name descname"><span class="pre">NaNControl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">EEGdata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">which_channel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">srate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">winLength</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NaNthreshold</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overlap</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyiEEGfeatures.NaNControl.NaNControl" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>EEGdata</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>) – matrix of EEG data, dimensions: channels x time points</p></li>
+<li><p><strong>srate</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – sampling frequency in Hz</p></li>
+<li><p><strong>winLength</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – the window length to split the data in seconds</p></li>
+<li><p><strong>NaNthreshold</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – The lower cut-off as percentage of windows with NaNs values. This will be a threshold of denoting the EEGdata</p></li>
+<li><p><strong>example</strong> (<em>eligible for computing the band power</em><em> or </em><em>just handling them as NaNs. For</em>) – </p></li>
+<li><p><strong>0.5</strong> (<em>this input parameter should be set as</em>) – </p></li>
+<li><p><strong>if</strong> (<em>this means that</em>) – </p></li>
+<li><p><strong>50%</strong> (<em>the %windows with at least one NaN is greater than</em>) – </p></li>
+<li><p><strong>replaced</strong> (<em>then the band power values won't be computed and instead will be</em>) – </p></li>
+<li><p><strong>values.</strong> (<em>by NaNs</em>) – </p></li>
+<li><p><strong>overlap</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – the overlapping points expressed as proportion of the “winLength” parameter,</p></li>
+<li><p><strong>overlapping</strong> (<em>for example for a 50%</em>) – </p></li>
+<li><p><strong>0.5</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>returns <code class="docutils literal notranslate"><span class="pre">Fail</span></code> or <code class="docutils literal notranslate"><span class="pre">Pass</span></code>. <code class="docutils literal notranslate"><span class="pre">Fail</span></code> mean that this part of segment exceeds the amount of NaNs according to the threshold specified.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>boolean</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Mariella Panagiotopoulou.
+      <span class="lastupdated">Last updated on True.
+      </span></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

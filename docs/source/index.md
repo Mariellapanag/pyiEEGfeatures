@@ -7,5 +7,5 @@
    :hidden:
    :maxdepth: 1
 
-api/index
+    api/index
 ```
