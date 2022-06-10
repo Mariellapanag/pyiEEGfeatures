@@ -56,8 +56,17 @@ subject_list = ["95", "851", "934", "999", "1005", "1149",
 # This subject is used for test purposes
 subject = "909"
 
+subj_info = pd.read_excel(os.path.join(paths.IN_FILES, "SeverityTable.xlsx"))
+subjects_normative = list(subj_info["patient_id"].unique())
+
+print(subject)
+if "GLAS" in subject:
+    cohort = "GLAS"
+else:
+    cohort = "UCLH"
+
 # Set the root directory for patient
-root = os.path.join(paths.IN_EDF_DATA, subject)
+root = os.path.join(paths.IN_EDF_DATA, cohort, "icEEG", subject)
 
 error_edfs = paths.error_edfs # channels labels appear in error edfs
 min_n_Chan = paths.min_n_Chan # the minimum threshold of the number of channels needed to be included in the edf file
