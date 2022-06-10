@@ -1,8 +1,9 @@
 from scipy import signal
 import numpy as np
 
-def FilterEEG(EEG, cutoff, sample_rate, butterworth_type, order):
-    """
+def FilterEEG(EEG: np.array, cutoff: list, sample_rate: float, butterworth_type: str, order: int):
+    r"""
+
     Simple Butterworth filter, with zero-phase filtering
     Importance of use of 2nd order sections:
     https://stackoverflow.com/questions/21862777/bandpass-butterworth-filter-frequencies-in-scipy
@@ -16,7 +17,8 @@ def FilterEEG(EEG, cutoff, sample_rate, butterworth_type, order):
         order: the order of the Butterworth filter (order is 2*order for the resulting filter,
         in the case of bandpass filter
 
-    Returns: (digital) filtered EEG signal as a matrix object (rows = channels, cols = time points)
+    Returns:
+        (digital) filtered EEG signal as a matrix object (rows = channels, cols = time points)
 
     """
     sos = signal.butter(N = order, Wn = cutoff, btype = butterworth_type, analog = False,
@@ -30,11 +32,12 @@ def FilterEEG(EEG, cutoff, sample_rate, butterworth_type, order):
     return filtered
 
 
-def FilterEEG_Channel(EEG, cutoff, sample_rate, butterworth_type, order):
-    """
+def FilterEEG_Channel(EEG: np.array, cutoff: list, sample_rate: float, butterworth_type: str, order: int):
+    r"""
     Simple Butterworth filter, with zero-phase filtering
     Importance of use of 2nd order sections:
     https://stackoverflow.com/questions/21862777/bandpass-butterworth-filter-frequencies-in-scipy
+
     Args:
         EEG: one single EEG signal (row = 1 channel, cols = time points)
         cutoff: list specifying cutoff of lowpass or highpass filter, or
@@ -45,7 +48,8 @@ def FilterEEG_Channel(EEG, cutoff, sample_rate, butterworth_type, order):
         order: the order of the Butterworth filter (order is 2*order for the resulting filter,
         in the case of bandpass filter
 
-    Returns: (digital) filtered EEG signal as a matrix object (rows = channels, cols = time points)
+    Returns:
+        (digital) filtered EEG signal as a single array (time points)
 
     """
     sos = signal.butter(N = order, Wn = cutoff, btype = butterworth_type, analog = False,
@@ -57,6 +61,8 @@ def FilterEEG_Channel(EEG, cutoff, sample_rate, butterworth_type, order):
         filtered = signal.sosfiltfilt(sos, EEG) # Apply a
         # forward-backward digital filter using cascaded second-order sections.
     return filtered
+
+
 # Check the filter
 #
 # def butter_bandpass(cutoff, sample_rate, butterworth_type, order):

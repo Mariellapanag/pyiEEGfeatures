@@ -1,7 +1,7 @@
 import numpy as np
 
-def NaNControl(EEGdata, which_channel, srate, winLength, NaNthreshold, overlap):
-    '''
+def NaNControl(EEGdata: np.array, which_channel: int, srate: float, winLength: float, NaNthreshold: float, overlap: float):
+    r"""
 
     Args:
         EEGdata: matrix of EEG data, dimensions: channels x time points
@@ -14,11 +14,10 @@ def NaNControl(EEGdata, which_channel, srate, winLength, NaNthreshold, overlap):
         overlap: the overlapping points expressed as proportion of the "winLength" parameter,
         for example for a 50% overlapping, this input parameter should be set as 0.5
 
-    Returns: a matrix of dimensions channels x time points
-    This will either a matrix of NaNs in case the proportion of chunks with at least 1 NaN value is greater than the NaNthreshold or
-    a matrix with the original values for the chunks without NaNs and NaNs for the chunks that at least 1 NaN was found
+    Returns:
+        boolean: returns ``Fail`` or ``Pass``. ``Fail`` mean that this part of segment exceeds the amount of NaNs according to the threshold specified.
 
-    '''
+    """
     # select specific channel
     EEGchannel = EEGdata[which_channel]
     # time vector
@@ -44,7 +43,7 @@ def NaNControl(EEGdata, which_channel, srate, winLength, NaNthreshold, overlap):
     for wi in range(0,len(winOnsets)):
 
         # get a chunk of data from this time window
-        datachunk = EEGchannel[winOnsets[wi]:winOnsets[wi]+winlength ]
+        datachunk = EEGchannel[winOnsets[wi]:winOnsets[wi]+winlength]
 
         # Count the number of NaNs in the datachunk
         NaNsum = np.sum(np.isnan(datachunk))

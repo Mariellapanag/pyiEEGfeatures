@@ -1,7 +1,20 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 def plotEEG(data, n_channels, ch_names, n_TimePoints, srate):
+    r"""
+
+    Args:
+        data:
+        n_channels:
+        ch_names:
+        n_TimePoints:
+        srate:
+
+    Returns:
+
+    """
     # Plot EEG
     sampling_points = data.shape[1]  # Sampling points that correspond to the seconds selected
     # Identify seconds

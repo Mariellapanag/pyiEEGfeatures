@@ -129,8 +129,8 @@ t_start = [dt for dt in
 t_stop = [tt + datetime.timedelta(seconds=winsec-1) for tt in t_start]
 
 # Checking all segments
-tt_start = t_start[sta:sto]
-tt_stop = t_stop[sta:sto]
+tt_start = t_start[0:1]
+tt_stop = t_stop[0:1]
 
 iEEGraw_data = edfExportSegieeg_A(edfs_info = edfs_info, channelsKeep = channelsKeep, t_start = tt_start, t_stop = tt_stop, fs_target = fs_target)
 

@@ -1,42 +1,46 @@
+import numpy as np
 from scipy import signal
 from scipy.signal import iirfilter
 from scipy.signal import lfilter
 
-def Implement_Notch_Filter(fs, band, freq, ripple, order, filter_type, data):
+def Implement_Notch_Filter(fs: float, band: list, freq: float, ripple: float, order: int, filter_type: str, data: np.array):
+    r"""
 
-    # Required input defintions are as follows;
-    # fs:     frequency samling
-    # band:   The bandwidth around the centerline freqency that you wish to filter
-    # freq:   The centerline frequency to be filtered
-    # ripple: The maximum passband ripple that is allowed in db
-    # order:  The filter order.  For FIR notch filters this is best set to 2 or 3,
-    #         IIR filters are best suited for high values of order.  This algorithm
-    #         is hard coded to FIR filters
-    # filter_type: 'butter', 'bessel', 'cheby1', 'cheby2', 'ellip'
-    # data:         the data to be filtered
+    Args:
+        fs: frequency sampling
+        band: the bandwidth around the center-line frequency that you wish to filter
+        freq: the center - line frequency to be filtered
+        ripple: the maximum pass-band ripple that is allowed in db
+        order: the filter order.  For FIR notch filters this is best set to 2 or 3,
+         IIR filters are best suited for high values of order.
+        filter_type: the type of the filter; 'butter', 'bessel', 'cheby1', 'cheby2', 'ellip'
+        data: the data to be filtered
 
-    nyq  = fs/2.0
-    low  = freq - band/2.0
+    Returns:
+        np.array: the filtered data
+    """
+    nyq = fs/2.0
+    low = freq - band/2.0
     high = freq + band/2.0
-    low  = low/nyq
+    low = low/nyq
     high = high/nyq
-    b, a = iirfilter(order, [low, high], rp=ripple, btype='bandstop',
-                     analog=False, ftype=filter_type)
+    b, a = iirfilter(order, [low, high], rp=ripple, btype='bandstop', analog=False, ftype=filter_type)
     filtered_data = lfilter(b, a, data)
     return filtered_data
 
 def iirnotch_filter(fs, notch_frequency, quality_factor, data):
-    """
-    
+    r"""
+
     Args:
         fs: frequency sampling, in Hz
         notch_freq: the center-line frequency to be filtered
-        quality_factor: the quality factor. see details in scipy.signal.iirnotch() 
+        quality_factor: the quality factor. see details in scipy.signal.iirnotch()
         data: signal the filtered will be applied
 
-    Returns: signal after applying the filter
-
+    Returns:
+        np.array: signal after applying the filter
     """
+
     b_notch, a_notch = signal.iirnotch(notch_frequency, quality_factor, fs)
 
     # apply notch filter to signal

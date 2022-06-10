@@ -29,11 +29,7 @@ then the whole repository is being downloaded. The library root is located in th
 
 ### For the ```root``` package
 
-* [[scipy = "^1.8.1"]](http://scipy.org)
-
-* [[sklearn = "^0.0"]](https://scikit-learn.org/stable/)
-
-* [[seaborn = "^0.11.2"]](https://seaborn.pydata.org/)
+The packages that needs to be install are located in the ``requirements.txt``
 
 ## Documentation
 
