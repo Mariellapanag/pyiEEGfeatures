@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pyEDFieeg &mdash; pyiEEGfeatures</title>
+  <title>pyiEEGfeatures &mdash; pyiEEGfeatures</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -55,7 +55,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="#" class="icon icon-home"></a> &raquo;</li>
-      <li>pyEDFieeg</li>
+      <li>pyiEEGfeatures</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/Mariellapanag/pyiEEGfeatures/blob/main../docs/source/index.md" class="fa fa-github"> Edit on GitHub</a>
       </li>
@@ -65,33 +65,26 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="pyedfieeg">
-<h1>pyEDFieeg<a class="headerlink" href="#pyedfieeg" title="Permalink to this headline"></a></h1>
+  <section id="pyieegfeatures">
+<h1>pyiEEGfeatures<a class="headerlink" href="#pyieegfeatures" title="Permalink to this headline"></a></h1>
 <p><img alt="Python Versions" src="https://img.shields.io/badge/python-%5E3.8%3C3.11-blue" />
 <img alt="Development" src="https://img.shields.io/badge/development-active-green.svg" />
-<a class="reference external" href="https://github.com/Mariellapanag/pyEDFieeg/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/mariellaPanag/pyEDFieeg.svg" /></a></p>
-<section id="useful-functions-for-navigating-unstructured-folders-of-edf-files-gathering-useful-information-and-extracting-specified-segments-of-data">
-<h2>Useful functions for navigating unstructured folders of EDF files, gathering useful information and extracting specified segments of data.<a class="headerlink" href="#useful-functions-for-navigating-unstructured-folders-of-edf-files-gathering-useful-information-and-extracting-specified-segments-of-data" title="Permalink to this headline"></a></h2>
+<a class="reference external" href="https://github.com/Mariellapanag/pyiEEGfeatures/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/mariellaPanag/pyiEEGfeatures.svg" /></a></p>
+<section id="useful-functions-for-computing-features-from-signals">
+<h2>Useful functions for computing features from signals<a class="headerlink" href="#useful-functions-for-computing-features-from-signals" title="Permalink to this headline"></a></h2>
 </section>
 <section id="about">
 <h2>About<a class="headerlink" href="#about" title="Permalink to this headline"></a></h2>
-<p>This package was motivated by the necessity of collecting and organising electroencephalographic (EEG) recordings from unstructured folders with European Data Format (EDF) files.
-Real data collected from patients with epilepsy often have several issues:</p>
-<ol class="arabic simple">
-<li><p>EDF files might overlap, either in the entire time period that enclose or in parts of it</p></li>
-<li><p>Channels might be drop out along the recording period</p></li>
-<li><p>Channels might be added along the recording period</p></li>
-<li><p>Missing recordings might be present along the entire recording</p></li>
-</ol>
+<p>This package supports the computation of band power obtained from EEG recordings. Supports missing data within the data.</p>
 </section>
 <section id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">pip</span></code> tool can be used to download the package</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ pip install git+https://github.com/Mariellapanag/pyEDFieeg.git
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ pip install git+https://github.com/Mariellapanag/pyiEEGfeatures.git
 </pre></div>
 </div>
 <p>or</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/Mariellapanag/pyEDFieeg.git
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/Mariellapanag/pyiEEGfeatures.git
 </pre></div>
 </div>
 <p>then the whole repository is being downloaded. The library root is located in the <code class="docutils literal notranslate"><span class="pre">.\src</span></code> folder.</p>
@@ -101,22 +94,15 @@ Real data collected from patients with epilepsy often have several issues:</p>
 <section id="for-the-root-package">
 <h3>For the <code class="docutils literal notranslate"><span class="pre">root</span></code> package<a class="headerlink" href="#for-the-root-package" title="Permalink to this headline"></a></h3>
 <ul class="simple">
-<li><p><a class="reference external" href="https://pandas.pydata.org/">[pandas = “^1.4.2”]</a></p></li>
-<li><p><a class="reference external" href="https://pypi.org/project/pyEDFlib/">[pyEDFlib = “^0.1.28”]</a></p></li>
 <li><p><a class="reference external" href="http://scipy.org">[scipy = “^1.8.1”]</a></p></li>
-<li><p><a class="reference external" href="https://matplotlib.org">[matplotlib = “^3.5.2”]</a></p></li>
-<li><p><a class="reference external" href="https://plotly.com/python/">[plotly = “^5.8.0”]</a></p></li>
-<li><p><a class="reference external" href="https://pypi.org/project/kaleido/">[kaleido = “0.2.1”]</a></p></li>
+<li><p><a class="reference external" href="https://scikit-learn.org/stable/">[sklearn = “^0.0”]</a></p></li>
+<li><p><a class="reference external" href="https://seaborn.pydata.org/">[seaborn = “^0.11.2”]</a></p></li>
 </ul>
-</section>
-<section id="for-running-the-processinguclh-scripts">
-<h3>for running the <code class="docutils literal notranslate"><span class="pre">processingUCLH</span></code> scripts<a class="headerlink" href="#for-running-the-processinguclh-scripts" title="Permalink to this headline"></a></h3>
-<p><a class="reference external" href="https://openpyxl.readthedocs.io/en/stable/">[openpyxl = “^3.0.10”]</a></p>
 </section>
 </section>
 <section id="documentation">
 <h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline"></a></h2>
-<p>The documentation can be found here <a class="reference external" href="https://mariellapanag.github.io/pyEDFieeg/">[Sphinx documentation]</a></p>
+<p>The documentation can be found here <a class="reference external" href="https://mariellapanag.github.io/pyiEEGfeatures/">[Sphinx documentation]</a></p>
 </section>
 <section id="acknowledgements">
 <h2>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Permalink to this headline"></a></h2>
