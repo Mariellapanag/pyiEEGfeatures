@@ -4,6 +4,5 @@
 :caption: 'Contents:'
 :maxdepth: 2
     
-edfCollectionInfo
-edfSegmentsiEEGSimple
+artefactsMetrics
 ```

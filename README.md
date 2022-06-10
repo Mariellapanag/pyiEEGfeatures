@@ -1,7 +1,5 @@
 # pyEDFieeg
 
-![Image](https://github.com/Mariellapanag/pyEDFieeg/blob/main/GitpageImages/frontimage.png?raw=true)
-
 ![Python Versions](https://img.shields.io/badge/python-^3.8<3.11-blue)
 ![Development](https://img.shields.io/badge/development-active-green.svg)
 [![License](https://img.shields.io/github/license/mariellaPanag/pyEDFieeg.svg)](https://github.com/Mariellapanag/pyEDFieeg/blob/main/LICENSE)

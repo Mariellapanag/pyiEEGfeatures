@@ -18,7 +18,7 @@ sys.path.insert(0, os.path.abspath(os.path.join('../../src/')))
 
 # -- Project information -----------------------------------------------------
 
-project = 'pyEDFieeg'
+project = 'pyiEEGfeatures'
 copyright = '2022, Mariella Panagiotopoulou'
 author = 'Mariella Panagiotopoulou'
 
@@ -69,14 +69,14 @@ html_theme_options = {
 html_context = {
     "display_github": True,
     "github_user": "Mariellapanag",
-    "github_repo": "pyEDFieeg",
+    "github_repo": "pyiEEGfeatures",
     "github_version": "main",
     "last_updated": True,
     "conf_py_path": "../docs/source/", # path in the docs root
     "source_suffix": ".md",
 }
 
-html_title = "pyEDFieeg"
+html_title = "pyiEEGfeatures"
 html_static_path = ["_static"]
 #html_extra_path = ["README.md"]
 html_css_files = ["custom.css"]
