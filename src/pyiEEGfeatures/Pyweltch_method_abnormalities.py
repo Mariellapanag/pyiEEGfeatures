@@ -5,7 +5,7 @@ from pyiEEGfeatures.IIR_notch_filter import *
 from pyiEEGfeatures.FilterEEG import *
 from pyEDFieeg.edfCollectionInfo import *
 
-def EEG_PyWelch_abnomalities(EEGdata, srate, which_channel, butter_cutoff, butter_order, frange_bands, winLength, overlap, notch, notch_freq, quality_factor):
+def EEG_PyWelch_abnormalities(EEGdata, srate, which_channel, butter_cutoff, butter_order, frange_bands, winLength, overlap, notch, notch_freq, quality_factor):
 
     '''
     Args:
