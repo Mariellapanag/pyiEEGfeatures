@@ -5,7 +5,7 @@ import scipy.io as sio
 
 # internal modules
 from pyiEEGfeatures.artefactsMetrics import *
-from pyiEEGfeatures.Welch_with_NaNs_normative import *
+from pyiEEGfeatures.Welch_with_NaNs_abnormalities import *
 from pyEDFieeg.edfSegmentsiEEGSimple import *
 import paths
 
@@ -47,9 +47,7 @@ def bandpower_process(EEGdata, fs, badch_indx):
     return super_list
 
 
-subject_list = ["95", "851", "934", "999", "1005", "1149",
-                "1163", "1167", "1182", "1200", "1211", "1106", "1379", "1395",
-                "GLAS040", "GLAS041", "GLAS044", "GLAS047"]
+subject_list = ["931", "934", "999", "1163", "1200"]
 
 subject = ss
 

@@ -7,7 +7,7 @@ import scipy.io as sio
 
 # internal modules
 from pyiEEGfeatures.artefactsMetrics import *
-from pyiEEGfeatures.Welch_with_NaNs_normative import *
+from pyiEEGfeatures.Welch_with_NaNs_abnormalities import *
 from pyEDFieeg.edfSegmentsiEEGSimple import *
 import paths
 

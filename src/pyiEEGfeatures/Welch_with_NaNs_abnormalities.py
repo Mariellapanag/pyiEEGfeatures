@@ -1,5 +1,5 @@
 from pyiEEGfeatures.NaNControl import NaNControl
-from pyiEEGfeatures.Pyweltch_method_normative import EEG_PyWelch
+from pyiEEGfeatures.Pyweltch_method_abnormalities import EEG_PyWelch_abnomalities
 import numpy as np
 
 """
@@ -64,7 +64,7 @@ def EEG_Python_Welch_allChannels_abnormalities(EEGdata, badch_indx, srate, frang
         init_array = np.zeros(n_channels, dtype = np.float32)
         all_bp = {"Delta": np.full_like(init_array, np.nan), "Theta": np.full_like(init_array, np.nan),
                   "Alpha": np.full_like(init_array, np.nan), "Beta": np.full_like(init_array, np.nan),
-                  "Gamma": np.full_like(init_array, np.nan), "hGamma": np.full_like(init_array, np.nan)}
+                  "Gamma": np.full_like(init_array, np.nan)}
         freqs = np.full_like(init_array, np.nan)
         psds = np.full_like(init_array, np.nan)
 
@@ -89,7 +89,7 @@ def EEG_Python_Welch_allChannels_abnormalities(EEGdata, badch_indx, srate, frang
             # Control checking for NaNs
             message = NaNControl(data_CA, which_channel, srate, winLength, NaNthreshold, overlap)
             if(message == "Pass"):
-                temp_run = EEG_PyWelch(data_CA, srate, which_channel,
+                temp_run = EEG_PyWelch_abnomalities(data_CA, srate, which_channel,
                                             butter_cutoff, butter_order, frange_bands,
                                             winLength, overlap, notch, notch_freq, quality_factor)
                 freqb_channels_bp[:,i] = temp_run[0]
@@ -99,7 +99,8 @@ def EEG_Python_Welch_allChannels_abnormalities(EEGdata, badch_indx, srate, frang
                 # window length in seconds*srate
                 winlength = int(winLength*srate)
                 # vector of frequencies, Hz
-                Nyquist = srate/2
+                srate_new = 200
+                Nyquist = srate_new/2
                 freqvec = np.linspace(0,Nyquist,int(np.floor(winlength/2)+1))
                 init_array = np.zeros(len(frange_bands), dtype = np.float32)
                 freqb_channels_bp[:,i] = np.full_like(init_array, np.nan)
@@ -109,7 +110,7 @@ def EEG_Python_Welch_allChannels_abnormalities(EEGdata, badch_indx, srate, frang
                 eegpowW.append(np.full_like(initfreq_array, np.nan))
 
         all_bp = {"Delta": freqb_channels_bp[0,:], "Theta": freqb_channels_bp[1,:], "Alpha": freqb_channels_bp[2,:], "Beta": freqb_channels_bp[3,:],
-                  "Gamma": freqb_channels_bp[4,:], "hGamma": freqb_channels_bp[5,:]}
+                  "Gamma": freqb_channels_bp[4,:]}
 
         freqs = np.vstack(freqlist)
         psds = np.vstack(eegpowW)

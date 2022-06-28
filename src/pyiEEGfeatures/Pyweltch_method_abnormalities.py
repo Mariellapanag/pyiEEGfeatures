@@ -59,10 +59,11 @@ def EEG_PyWelch_abnomalities(EEGdata, srate, which_channel, butter_cutoff, butte
     # Butterworth bandpass filter
     butter_filtered_data = FilterEEG_Channel(notched_data, butter_cutoff, srate, "bandpass", butter_order)
 
+    srate_new = 200
     # Downsample the data to 200Hz
-    downsampled_data = downsample_decimate(signal = butter_filtered_data)
+    downsampled_data = downsample_decimate(signal = butter_filtered_data, fs = srate, target_fs=srate_new)
     ## The Welch's method will be applied to the filtered data from previous step
-    freq, psds = scipy.signal.welch(butter_filtered_data, fs=srate, nperseg=winlength,
+    freq, psds = scipy.signal.welch(downsampled_data, fs=srate_new, nperseg=winlength,
                                     noverlap=nOverlap, detrend=False)
 
     # Frequency resolution
@@ -73,6 +74,7 @@ def EEG_PyWelch_abnomalities(EEGdata, srate, which_channel, butter_cutoff, butte
 
     # initialise the spectral power density for each band overall
     psd_band = np.zeros(len_frange_bands)
+    psd_band_tmp = np.zeros(len_frange_bands)
 
     for band in range(0, len_frange_bands):
         # Get the values of the i element of the dictionary
@@ -86,7 +88,9 @@ def EEG_PyWelch_abnomalities(EEGdata, srate, which_channel, butter_cutoff, butte
         bp = simps(psds[idx_band], dx=freq_res)
 
         # Store the spectral density power for each band and each window into the matrix
-        psd_band[band] = bp
+        psd_band_tmp[band] = bp
 
+    psd_band[0:4] = psd_band_tmp[0:4]
+    psd_band[4:5] = np.sum(psd_band_tmp[4:])
 
     return [psd_band, freq, psds]
