@@ -36,7 +36,7 @@ def bandpower_process(EEGdata, fs, badch_indx):
     # THIS NEEDS TO BE SPECIDIED BY THE USER
     notch_freq = 50.0 # remove line noise and its harmonics
 
-    quality_factor = 35
+    quality_factor = 35.0
     NaNthreshold = 0
 
     print("Computing band power for this segment of data")
