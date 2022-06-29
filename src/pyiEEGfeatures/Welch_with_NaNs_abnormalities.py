@@ -97,9 +97,9 @@ def EEG_Python_Welch_allChannels_abnormalities(EEGdata, badch_indx, srate, frang
                 eegpowW.append(temp_run[2])
             else:
                 # window length in seconds*srate
-                winlength = int(winLength*srate)
-                # vector of frequencies, Hz
                 srate_new = 200
+                winlength = int(winLength*srate_new)
+                # vector of frequencies, Hz
                 Nyquist = srate_new/2
                 freqvec = np.linspace(0,Nyquist,int(np.floor(winlength/2)+1))
                 init_array = np.zeros(len(frange_bands), dtype = np.float32)
