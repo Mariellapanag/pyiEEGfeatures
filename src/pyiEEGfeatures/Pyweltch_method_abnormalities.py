@@ -63,7 +63,10 @@ def EEG_PyWelch_abnormalities(EEGdata, srate, which_channel, butter_cutoff, butt
     # Downsample the data to 200Hz
     downsampled_data = downsample_decimate(signal = butter_filtered_data, fs = srate, target_fs=srate_new, method = "decimate")
     ## The Welch's method will be applied to the filtered data from previous step
-    freq, psds = scipy.signal.welch(downsampled_data, fs=srate_new, nperseg=winlength,
+    winlength_new = int(winLength*srate_new)
+    # number of points to overlap
+    nOverlap_new = np.round(winlength_new * overlap)
+    freq, psds = scipy.signal.welch(downsampled_data, fs=srate_new, nperseg=winlength_new,
                                     noverlap=nOverlap, detrend=False)
 
     # Frequency resolution
