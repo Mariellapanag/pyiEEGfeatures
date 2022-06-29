@@ -80,7 +80,8 @@ def EEG_Python_Welch_allChannels_abnormalities(EEGdata, badch_indx, srate, frang
             mean = np.nanmean(EEGdata, axis=0)
             data_CA = EEGdata - mean[np.newaxis,:]
 
-        freqb_channels_bp = np.zeros((len(frange_bands), n_channels), dtype = np.float32)
+        len_frange_band_last = 5
+        freqb_channels_bp = np.zeros((len_frange_band_last, n_channels), dtype = np.float32)
 
         freqlist = []
         eegpowW = []
@@ -102,7 +103,7 @@ def EEG_Python_Welch_allChannels_abnormalities(EEGdata, badch_indx, srate, frang
                 # vector of frequencies, Hz
                 Nyquist = srate_new/2
                 freqvec = np.linspace(0,Nyquist,int(np.floor(winlength/2)+1))
-                init_array = np.zeros(len(frange_bands), dtype = np.float32)
+                init_array = np.zeros(len_frange_band_last, dtype = np.float32)
                 freqb_channels_bp[:,i] = np.full_like(init_array, np.nan)
 
                 initfreq_array = np.zeros(len(freqvec), dtype = np.float32)
