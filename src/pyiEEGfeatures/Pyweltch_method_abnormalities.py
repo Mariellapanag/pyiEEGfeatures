@@ -61,7 +61,7 @@ def EEG_PyWelch_abnormalities(EEGdata, srate, which_channel, butter_cutoff, butt
 
     srate_new = 200
     # Downsample the data to 200Hz
-    downsampled_data = downsample_decimate(signal = butter_filtered_data, fs = srate, target_fs=srate_new)
+    downsampled_data = downsample_decimate(signal = butter_filtered_data, fs = srate, target_fs=srate_new, method = "fourier")
     ## The Welch's method will be applied to the filtered data from previous step
     freq, psds = scipy.signal.welch(downsampled_data, fs=srate_new, nperseg=winlength,
                                     noverlap=nOverlap, detrend=False)
