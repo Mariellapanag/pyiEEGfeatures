@@ -73,7 +73,8 @@ def EEG_PyWelch_abnormalities(EEGdata, srate, which_channel, butter_cutoff, butt
     len_frange_bands = len(frange_bands)
 
     # initialise the spectral power density for each band overall
-    psd_band = np.zeros(len_frange_bands)
+    len_frange_band_last = 5
+    psd_band = np.zeros(len_frange_band_last)
     psd_band_tmp = np.zeros(len_frange_bands)
 
     for band in range(0, len_frange_bands):
