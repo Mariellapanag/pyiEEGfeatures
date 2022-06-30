@@ -67,7 +67,7 @@ def EEG_PyWelch_abnormalities(EEGdata, srate, which_channel, butter_cutoff, butt
     # number of points to overlap
     nOverlap_new = np.round(winlength_new * overlap)
     freq, psds = scipy.signal.welch(downsampled_data, fs=srate_new, nperseg=winlength_new,
-                                    noverlap=nOverlap, detrend=False)
+                                    noverlap=nOverlap_new, detrend=False)
 
     # Frequency resolution
     freq_res = freq[1] - freq[0]
