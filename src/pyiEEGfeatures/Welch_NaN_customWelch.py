@@ -25,7 +25,7 @@ Version 0.1 Date: 30/12/2020
 
 # EEGdata = np.transpose(raw_df_list_NaNC[0]).values
 
-def EEG_Python_Welch_allChannels(EEGdata, badch_indx, srate, frange_bands, winLength, butter_cutoff, butter_order, overlap, notch, notch_freq, quality_factor, NaNthreshold):
+def EEG_Python_Welch_allChannels_custom(EEGdata, badch_indx, srate, frange_bands, winLength, butter_cutoff, butter_order, overlap, notch, notch_freq, quality_factor, NaNthreshold):
     '''
 
     Args:
